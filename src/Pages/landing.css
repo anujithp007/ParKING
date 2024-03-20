@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dangrek&family=Marko+One&display=swap');
+
+
+.bg1{
+    background-image: url(../image/entrance-modern-underground-car-park.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bg2{
+  background-image: url(../image/hallway-garage.jpg);
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.bg3{
+  background-image: url(../image/ss.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg4{
+  background-image: url(../image/qq.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+}
+.dangrek-regular {
+  font-family: "Dangrek", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.kanit-regular {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .marko-one-regular {
+    font-family: "Marko One", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  
+  .text-refresh-animation {
+    animation: fadeIn 2s ease-out; /* Adjust timing and easing as needed */
+  }
+  .flipX {
+    animation: 1s anim-flipX ease infinite;
+  }
+  @keyframes anim-flipX {
+    0% {
+      opacity: 0;
+      transform: rotateX(90def);
+    }
+    50% {
+      opacity: 1;
+      transform: rotateX(720deg);
+    }
+    100% {
+      /* animate nothing to pause animation at the end */
+      opacity: 1;
+      transform: rotateX(720deg);
+    }
+  }
+  
+ .swiper-wrapper{
+
+ }  
+ .swiper-slide{
+  width: 170px!important;
+ }
+ @media screen and (min-width: 480px) {
+  .swiper-slide{
+    width: 370px!important;
+   }
+}
