@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../Components/Footer'
 
 export const Contact1 = () => {
   return (
@@ -93,6 +94,8 @@ export const Contact1 = () => {
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.029350292072!2d75.78803907402384!3d11.259251150104475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba659b401c5ac4b%3A0xa44be8349fd6f5ec!2sSoftroniics%20-%20Flutter%2C%20Data%20Science%2C%20MERN%20Stack%2C%20PHP%20Laravel%20training%20Institute%20in%20Kerala!5e0!3m2!1sen!2sin!4v1710916318551!5m2!1sen!2sin" width="100%" height="450" className='border-0 mt-[9rem]' allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+
+    <Footer/>
     </div>
   )
 }

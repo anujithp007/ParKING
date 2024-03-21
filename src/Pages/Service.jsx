@@ -5,6 +5,7 @@ import { FaLocationPinLock } from "react-icons/fa6";
 
 
 import { FaLock } from "react-icons/fa";
+import Footer from '../Components/Footer';
 
 
 export const Service = () => {
@@ -225,6 +226,8 @@ export const Service = () => {
 
     </div>
 </div>
+
+<Footer/>
 
 </div>
   )

@@ -5,6 +5,8 @@ import Landing from './Pages/Landing'
 import { Service } from './Pages/Service'
 import About from './Pages/About'
 import Contact, { Contact1 } from './Pages/Contact1'
+import Reg from './Components/Reg'
+
 
 export const App = () => {
   return (
@@ -19,7 +21,11 @@ export const App = () => {
 <Route path='/service' element={<Service/>}></Route>
 <Route path='/about' element={<About/>}></Route>
 <Route path='/contact' element={<Contact1/>}></Route>
+
 </Route>
+<Route path='/register' element={<Reg/>}></Route>
+
+
 
 </Routes>
   </BrowserRouter>

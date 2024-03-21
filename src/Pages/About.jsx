@@ -16,6 +16,7 @@ import 'swiper/css/pagination';
 
 
 import { Pagination,Autoplay } from 'swiper/modules';
+import Footer from '../Components/Footer'
 
 const About = () => {
   return (
@@ -141,6 +142,8 @@ const About = () => {
       </Swiper>
     
         </div>
+
+        <Footer/>
     </div>
   )
 }
