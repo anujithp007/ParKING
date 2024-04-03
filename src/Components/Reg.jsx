@@ -1,26 +1,83 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+
+
+
 
 const Reg = () => {
     const[data,setData]=useState('')
+    const navigate=useNavigate()
 
     const handleChange=(e)=>{
-        setData({...data,[e.target.name]:e.target.value})
+        if(e.target.name=='file'){
+            setData({...data,file:e.target.files[0]})
+        }
+        else{
+
+            setData({...data,[e.target.name]:e.target.value})
+        }
         console.log(data,'change');
+
+        
+        // Append form data
+        
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit= async (e)=>{
         e.preventDefault()
+        const formData = new FormData();
         setData(data)
         console.log(data,'done');
+        formData.append('username', data.username);
+        formData.append('email', data.email);
+        formData.append('password', data.password);
+        formData.append('phonenumber',data.phonenumber);
+        formData.append('usertype',data.usertype);
+        formData.append('file', data.file);
+
+        try{
+                const response= await axios.post('http://localhost:5000/auth/register',formData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }})
+                  console.log(response);
+                  data.email&&data.password ?
+                  toast.success('registration success') :
+                  toast.error('fill the blanks')
+                  navigate('/login')
+
+
+        }
+        catch(e){
+            console.log(e);
+            toast.error('error occured')
+
+        }
     }
   return (
     <div>
+         <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+
+/>
+<ToastContainer/>
 <div class="h-screen md:flex">
 	<div
 		class="relative h-[125vh] overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-[#64BF08] to-[#B7E003] i justify-around items-center hidden">
 		<div className='mb-16'>
         <span class="self-center text-[3rem] font-semibold whitespace-nowrap dark:text-white">Par<span className='text-orange-500'>KING</span></span>
 			<p class="text-white mt-1">The most popular parking management system</p>
-			<button type="submit" class="block w-28 bg-white text-black hover:bg-green-300 mt-4 py-2 rounded-2xl font-bold mb-2">Login</button>
+			<Link to={'/login'}><button type="submit" class="block w-28 bg-white text-black hover:bg-green-300 mt-4 py-2 rounded-2xl font-bold mb-2">Login</button></Link>
 		</div>
 		<div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
 		<div class="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
@@ -97,7 +154,7 @@ const Reg = () => {
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
         </div>
-        <input onChange={(e)=>handleChange(e)} id="dropzone-file" type="file" class="hidden" />
+        <input onChange={(e)=>handleChange(e)} id="dropzone-file" name='file' type="file" class="hidden" />
     </label>
 </div> 
 
