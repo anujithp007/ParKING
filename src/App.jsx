@@ -15,6 +15,9 @@ import PPlanding from './Pages/parkingprovider/PPlanding'
 import Userpage from './Pages/adminpage/Userpage'
 import AddSpace from './Pages/parkingprovider/AddSpace'
 import AddSpot from './Pages/parkingprovider/AddSpot'
+import ViewSpot from './Pages/parkingprovider/ViewSpot'
+import BikeView from './Pages/parkingprovider/BikeView'
+import CarView from './Pages/parkingprovider/CarView'
 
 
 export const App = () => {
@@ -45,6 +48,10 @@ export const App = () => {
     <Route index element={<PPlanding/>}></Route>
     <Route path='addspace' element={<AddSpace/>}></Route>
     <Route path='addspot/:id' element={<AddSpot/>}></Route>
+    <Route path='viewspot' element={<ViewSpot/>}>
+    <Route path='bike' element={<BikeView/>}></Route>
+    <Route path='car' element={<CarView/>}></Route>
+    </Route>
 
 </Route>
 

@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const AddSpot = () => {
     const { id } = useParams();
+    console.log(id);
     const [data, setData] = useState('');
     const [data1, setData1] = useState('');
     const [maxSpotNo, setMaxSpotNo] = useState('');
@@ -21,6 +22,10 @@ const AddSpot = () => {
         };
         fetchData();
     }, [id]);
+    const dataToSend = {
+        ...data1,
+        space: id // Assuming 'id' holds the _id of the Space document
+    };
 const handleChange=(e)=>{
     setData1({...data1,[e.target.name]:e.target.value})
     console.log(data1,'uu');
@@ -31,33 +36,21 @@ const handleChange=(e)=>{
         setData1(data1)
         console.log(data1);
 
-        try{
-            let response= await axios.post('http://localhost:5000/parking/addspot',data1)
-            console.log(response.data,'juu');
-            toast.success('added spot successfully')
+            try{
+                const response = await axios.post('http://localhost:5000/parking/addspot', dataToSend); 
+                console.log(response.data,'juu');
+                toast.success('added spot successfully')
 
-        }
-        catch(e){
-            console.log(e);
+            }
+            catch(e){
+                console.log(e);
         }
     };
 
     return (
         <div>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-
-            />
-            <ToastContainer />
+           
+            
             <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
                 <div className="mb-5">
                     <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slot number</label>
