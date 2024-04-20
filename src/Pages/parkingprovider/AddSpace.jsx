@@ -3,12 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const AddSpace = () => {
+  const id=localStorage.getItem('id')
+  const token=localStorage.getItem('token')
   const[data,setData]=useState([''])
-  const [formData, setFormData] = useState({
-    vehicletype: '',
-    totalspace: '',
-    diffrentlyabled: ''
-  });
+  const [formData, setFormData] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -27,6 +25,7 @@ const AddSpace = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData,'jiiii');  
   };
 
   const handleSubmit = async (e) => {
@@ -34,21 +33,22 @@ const AddSpace = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/parking/addspace', formData);
+      console.log(formData,'--------------------------');
+      const response = await axios.post(`http://localhost:5000/parking/addspace/${id}`, formData);
       console.log('Space added successfully:', response.data);
       // Reset form data after successful submission
-      setFormData({
-        vehicletype: '',
-        totalspace: '',
-        diffrentlyabled: ''
-      });
+      // setFormData({
+      //   vehicletype: '',  
+      //   totalspace: '',
+      //   diffrentlyabled: ''
+      // });
     } catch (error) {
       setError('Error adding space: ' + error.message);
     } finally {
       setLoading(false);
     }
   };
-  console.log(data,'kou');
+  
   return (
     <div className="min-h-screen py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -66,22 +66,19 @@ const AddSpace = () => {
                 <div className="flex flex-col">
                   <label className="leading-loose">Vehicle type</label>
                   <div className="flex items-center mb-4">
-                    <input onChange={handleChange} type="radio" value="car" name="vehicletype" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   dark:bg-gray-700 dark:border-gray-600" />
+                    <input onChange={handleChange} type="radio" value="car" name="vehicleType" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   dark:bg-gray-700 dark:border-gray-600" />
                     <label htmlFor="default-radio-1" className="ms-2 text-sm text-gray-900 dark:text-gray-300">Car</label>
                   </div>
                   <div className="flex items-center">
-                    <input onChange={handleChange} type="radio" value="bike" name="vehicletype" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   dark:bg-gray-700 dark:border-gray-600" />
+                    <input onChange={handleChange} type="radio" value="bike" name="vehicleType" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   dark:bg-gray-700 dark:border-gray-600" />
                     <label htmlFor="default-radio-2" className="ms-2 text-sm text-gray-900 dark:text-gray-300">Bike</label>
                   </div>
                 </div>
                 <div className="flex flex-col">
                   <label className="leading-loose">Total Spaces</label>
-                  <input onChange={handleChange} type="number" name='totalspace' className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="" />
+                  <input onChange={handleChange} type="number" name='totalSpace' className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="" />
                 </div>
-                <div className="flex flex-col">
-                  <label className="leading-loose">Differently abled parking</label>
-                  <input onChange={handleChange} type="number" name='diffrentlyabled' className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="" />
-                </div>
+               
               </div>
               <div className="pt-4 flex items-center space-x-4">
                 <button disabled={loading} className="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">
@@ -94,21 +91,20 @@ const AddSpace = () => {
         </div>
       </div>
       <div className='flex justify-center gap-3 mt-20'>
-        {data.map((item)=>(
-            
-
-<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h1>Vehicle:{item.vehicletype}</h1>
-            <h1>Total space : {item.totalspace}</h1>
-            <h1>Diffrently abled space : {item.diffrentlyabled}</h1>
-        <Link to={`/pp/addspot/${item._id}`} >
-             <button type="button" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Name spot</button>
-          </Link>
-   
-</div>
-
-        ))}
+  {data.map((item) => (
+    item.userId === id ? (
+      <div key={item._id} className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <h1>Vehicle: {item.vehicleType}</h1>
+        <h1>Total space: {item.totalSpace}</h1>
+        <Link to={`/pp/addspot/${item._id}`}>
+          <button type="button" className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+            Name spot
+          </button>
+        </Link>
       </div>
+    ) : null
+  ))}
+</div>
     </div>
   );
 };

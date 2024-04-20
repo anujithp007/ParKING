@@ -8,14 +8,14 @@ const AddSpot = () => {
     console.log(id);
     const [data, setData] = useState('');
     const [data1, setData1] = useState('');
-    const [maxSpotNo, setMaxSpotNo] = useState('');
+    
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/parking/getspaceid/${id}`);
                 setData(response.data);
-                setMaxSpotNo(response.data.totalspace); // Assuming your data structure has a property named 'totalSpace'
+               
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -52,10 +52,7 @@ const handleChange=(e)=>{
            
             
             <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-                <div className="mb-5">
-                    <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slot number</label>
-                    <input onChange={handleChange} type="number" id="number" name="spotno" max={maxSpotNo} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Slot number" />
-                </div>
+               
                 <div className="mb-5">
                     <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slot name</label>
                     <input onChange={handleChange} type="text" id="text" name="spotname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Slot name" />

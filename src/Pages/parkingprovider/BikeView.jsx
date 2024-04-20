@@ -1,17 +1,24 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const BikeView = () => {
   const [data,setData]=useState([''])
+  const token=localStorage.getItem('token')
+  const id=localStorage.getItem('id') 
+  const navigate=useNavigate()
   useEffect(()=>{
     const fetchData= async ()=>{
-      let response= await axios.get('http://localhost:5000/parking/bikespot')
+      let response= await axios.get(`http://localhost:5000/parking/bikespot/${id}`)
       console.log(response,'kk');
       setData(response.data)
     }
     fetchData()
   },[])
   console.log(data,'bike');
+  if (!token) {
+    navigate('/login');
+}
   return (
     <div>
       <div className='flex flex-wrap mt-7 gap-5 justify-center items-center'>

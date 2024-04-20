@@ -40,14 +40,20 @@ const Login = () => {
 
                         navigate('/pp')
                     }
+                    else if(response.data.user.status=='reject'){
+                 
+                        toast.error('Admin rejected your request')
+                    }
                     else{
                         toast.warning('not accepted by admin')
+
                     }
                 }
-                if(response.data.user.status=='reject'){
-                 
-                    toast.error('Admin rejected your request')
+                if(response.data.user.usertype=='user'){
+                    navigate('/user')
                 }
+                
+                
             
         }
         catch (e) {

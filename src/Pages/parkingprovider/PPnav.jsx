@@ -2,13 +2,15 @@ import React from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 
 const PPnav = () => {
-
+  const id=localStorage.getItem('id')
+  const token=localStorage.getItem('token')
   const navigate=useNavigate()
   const logoutPP=()=>{
       localStorage.removeItem('id')
       localStorage.removeItem('token')
       navigate('/login')
   }
+ 
   return (
     <div>
         

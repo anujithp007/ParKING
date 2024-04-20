@@ -1,17 +1,26 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 const CarView = () => {
   const [data,setData]=useState([''])
+  const token=localStorage.getItem('token')
+  const id=localStorage.getItem('id')
+  const navigate=useNavigate()
+
   useEffect(()=>{
     const fetchData= async ()=>{
-      const response= await axios.get('http://localhost:5000/parking/carspot')
+      const response= await axios.get(`http://localhost:5000/parking/carspot/${id}`)
       console.log(response,'vt');
       setData(response.data)
     }
     fetchData()
   },[])
   console.log(data,'car');
+  if (!token) {
+    navigate('/login');
+}
   return (
     <div>
 

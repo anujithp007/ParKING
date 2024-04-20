@@ -18,6 +18,9 @@ import AddSpot from './Pages/parkingprovider/AddSpot'
 import ViewSpot from './Pages/parkingprovider/ViewSpot'
 import BikeView from './Pages/parkingprovider/BikeView'
 import CarView from './Pages/parkingprovider/CarView'
+import UserLanding from './Pages/Userpage/UserLanding'
+import UserNav from './Pages/Userpage/UserNav'
+import Location from './Pages/Userpage/Location'
 
 
 export const App = () => {
@@ -49,9 +52,19 @@ export const App = () => {
     <Route path='addspace' element={<AddSpace/>}></Route>
     <Route path='addspot/:id' element={<AddSpot/>}></Route>
     <Route path='viewspot' element={<ViewSpot/>}>
-    <Route path='bike' element={<BikeView/>}></Route>
-    <Route path='car' element={<CarView/>}></Route>
+    <Route path='bike/:id' element={<BikeView/>}></Route>
+    <Route path='car/:id' element={<CarView/>}></Route>
     </Route>
+
+</Route>
+
+<Route path='/user' element={<UserNav/>}>
+  <Route index element={<UserLanding/>}></Route>
+  <Route path='about' element={<About/>}></Route>
+<Route path='contact' element={<Contact1/>}></Route>
+<Route path='service' element={<Service/>}></Route>
+<Route path='location' element={<Location/>}></Route>
+
 
 </Route>
 
